@@ -28,8 +28,9 @@ public class ItemService {
          }
 
     }
-
+    //method that deletes the existing item by ID
     public void deleteItem(Long id) {
+        slf4jLogger.info("Item found and Deleted the record..!!!");
         gameStateRepo.deleteById(id);
 
 

@@ -65,20 +65,21 @@ public class GameStateRepositoryApplicationTests {
 	}
 
 	//Testing user scenario 3 - Deleting the existing item from the data store
-/*
+
     @Test
     public void testDeleteItemObject(){
 
 	    //Setup
-        Item item = new Item();
-        item.setItem_id((long) 4);
+        Long item_id = 4L;
+
         ItemController itemController = new ItemController(mockItemService);
 
         //Execute
-        itemController.deleteItem(item.getItem_id());
+        itemController.deleteItem(item_id);
+
         //assert
-        then(mockItemService).should(times(1).);
+        then(mockItemService).should(times(1)).deleteItem(item_id);
         //teardown
-    }*/
+    }
 
 }
