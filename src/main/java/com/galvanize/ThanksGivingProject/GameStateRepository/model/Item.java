@@ -21,7 +21,7 @@ public class Item {
         return item_id;
     }
 
-    public void setItem_id(long item_id) {
+    public void setItem_id(Long item_id) {
         this.item_id = item_id;
     }
 
@@ -33,7 +33,7 @@ public class Item {
         this.item_name = item_name;
     }
 
-    public Item(long id, String name){
+    public Item(Long id, String name){
         this.item_id = id;
         this.item_name = name;
 

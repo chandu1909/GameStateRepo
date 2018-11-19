@@ -24,8 +24,14 @@ public class ItemService {
         }
          else {
              slf4jLogger.info("New entry created on datasource..!!");
-            return gameStateRepo.save(item);
+             return gameStateRepo.save(item);
          }
+
+    }
+
+    public void deleteItem(Long id) {
+        gameStateRepo.deleteById(id);
+
 
     }
 }

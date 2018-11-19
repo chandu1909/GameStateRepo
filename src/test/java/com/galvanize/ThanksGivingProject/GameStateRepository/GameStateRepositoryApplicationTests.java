@@ -11,6 +11,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.BDDMockito.then;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.validateMockitoUsage;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
@@ -46,10 +49,10 @@ public class GameStateRepositoryApplicationTests {
 	//Testing user scenario2
 	@Test
 	public void testCreateExistingItemObject(){
-		assertTrue(true);
+		//assertTrue(true);
 
 		//Setup
-        Item expectedResult = new Item();
+        Item expectedResult = new Item((long) 3,"Sword");
         ItemController itemController = new ItemController(mockItemService);
         when(mockItemService.addItem(expectedResult)).thenReturn(expectedResult);
 
@@ -59,8 +62,23 @@ public class GameStateRepositoryApplicationTests {
         assertEquals(expectedResult,actualResult);
 
         //TearDown
-
-
 	}
+
+	//Testing user scenario 3 - Deleting the existing item from the data store
+/*
+    @Test
+    public void testDeleteItemObject(){
+
+	    //Setup
+        Item item = new Item();
+        item.setItem_id((long) 4);
+        ItemController itemController = new ItemController(mockItemService);
+
+        //Execute
+        itemController.deleteItem(item.getItem_id());
+        //assert
+        then(mockItemService).should(times(1).);
+        //teardown
+    }*/
 
 }
