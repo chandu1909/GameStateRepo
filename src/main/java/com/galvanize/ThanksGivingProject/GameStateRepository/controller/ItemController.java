@@ -2,7 +2,6 @@ package com.galvanize.ThanksGivingProject.GameStateRepository.controller;
 
 import com.galvanize.ThanksGivingProject.GameStateRepository.model.Item;
 import com.galvanize.ThanksGivingProject.GameStateRepository.service.ItemService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

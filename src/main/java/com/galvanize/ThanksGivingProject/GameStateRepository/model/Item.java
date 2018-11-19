@@ -11,7 +11,7 @@ public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    private long item_id;
+    private Long item_id;
 
     @Column(name = "NAME")
     private String item_name;
@@ -33,9 +33,9 @@ public class Item {
         this.item_name = item_name;
     }
 
-    public Item(long id, String item_name){
+    public Item(long id, String name){
         this.item_id = id;
-        this.item_name = item_name;
+        this.item_name = name;
 
     }
 
