@@ -74,4 +74,8 @@ public class ItemService {
         return gameStateRepo.findByName(item_name);
 
     }
+
+    public Iterable<Item> getItems() {
+        return gameStateRepo.findAll();
+    }
 }

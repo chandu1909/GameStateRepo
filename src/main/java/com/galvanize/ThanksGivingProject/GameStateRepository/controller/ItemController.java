@@ -73,7 +73,7 @@ public class ItemController {
     }
 
     //Get Items by the class Name..
-    @GetMapping("get/class/{name}")
+    @GetMapping("/get/class/{name}")
     public Iterable<Item> getItemsByClass(@PathVariable String name){
         try{
             return itemService.getByClass(name);
@@ -83,6 +83,12 @@ public class ItemController {
         }
 
         return null;
+    }
+
+    //Get all Items from the datastore...
+    @GetMapping("/get")
+    public Iterable<Item> getItems(){
+        return  itemService.getItems();
     }
 
 

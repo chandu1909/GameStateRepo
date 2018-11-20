@@ -18,9 +18,7 @@ import java.util.Optional;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.BDDMockito.then;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.validateMockitoUsage;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -109,7 +107,7 @@ public class GameStateRepositoryApplicationTests {
 	//Testing get all items of a specific type
     @Test
     public void testGetSameTypeItems(){
-        assertTrue(true);
+        //assertTrue(true);
 	    //setup
         String item_name = "SWORD";
         ArrayList<Item> expectedResult = new ArrayList<Item>();
@@ -124,6 +122,22 @@ public class GameStateRepositoryApplicationTests {
 
         //Teardown
     }
+
+    //Testing Get all items in registry
+	@Test
+	public void testGetAllData(){
+		//setup
+		ArrayList<Item> expectedResult = new ArrayList<Item>();
+		ItemController itemController = new ItemController(mockItemService);
+		when(mockItemService.getItems()).thenReturn(expectedResult);
+
+		//Execute
+        ArrayList actualResult = (ArrayList) itemController.getItems();
+
+        //Assert
+        assertEquals(expectedResult,actualResult);
+		//Teardown
+	}
 
 
 }
