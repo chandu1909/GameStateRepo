@@ -86,14 +86,14 @@ public class GameStateRepositoryApplicationTests {
         then(mockItemService).should(times(1)).deleteItem(item_id);
         //teardown
     }
-
+    //Testing user scenario 5 & 6 - getting item if found not returning 404 if not found
     @Test
-	public void testGetSpecificItem(){
+	public void testGetSpecificItem()throws GreenLightException,ResourceNotFoundException{
 		//SetUp
 		Long item_id = 6L;
-		Item expectedResult = new Item();
+		Optional<Item> expectedResult = Optional.of(new Item());
 		ItemController itemController = new ItemController(mockItemService);
-		when(mockItemService.getById(item_id)).thenReturn((expectedResult);
+		when(mockItemService.getById(item_id)).thenReturn(expectedResult);
 
 		//Execute
 		Optional<Item> actualResult = itemController.getItemById(item_id);

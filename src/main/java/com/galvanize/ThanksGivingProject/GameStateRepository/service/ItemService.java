@@ -2,6 +2,8 @@ package com.galvanize.ThanksGivingProject.GameStateRepository.service;
 
 import com.galvanize.ThanksGivingProject.GameStateRepository.model.Item;
 import com.galvanize.ThanksGivingProject.GameStateRepository.repository.GameStateRepo;
+import org.apache.logging.slf4j.SLF4JLogger;
+import org.springframework.boot.logging.Slf4JLoggingSystem;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,12 +41,23 @@ public class ItemService {
             throw new GreenLightException();
         }
         else {
+            slf4jLogger.info("Item not found raising exception");
             throw new ResourceNotFoundException();
         }
 
     }
 
-    public Optional<Item> getById(Long id) {
-        return gameStateRepo.findById(id);
+    public Optional<Item> getById(Long id) throws GreenLightException, ResourceNotFoundException {
+        if (gameStateRepo.existsById(id)){
+            slf4jLogger.info("Item found..Returning to console");
+            return gameStateRepo.findById(id);
+
+        }
+        else {
+            slf4jLogger.info("Item not found ..raising exception");
+            throw new ResourceNotFoundException();
+        }
+
+
     }
 }

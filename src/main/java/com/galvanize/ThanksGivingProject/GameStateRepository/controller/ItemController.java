@@ -58,14 +58,17 @@ public class ItemController {
 
     //Get specificItem Based on ID
     @GetMapping("/get/{id}")
-    public Optional<Item> getItemById(@PathVariable Long id){
+    public Optional<Item> getItemById (@PathVariable Long id) throws ResourceNotFoundException, GreenLightException {
         try{
             return itemService.getById(id);
         }
-        catch (Exception e){
-
+        catch (ResourceNotFoundException notFound){
+            throw new ResourceNotFoundException();
         }
-        return null;
+        catch (GreenLightException found){
+            throw new GreenLightException();
+        }
+
     }
 
 
