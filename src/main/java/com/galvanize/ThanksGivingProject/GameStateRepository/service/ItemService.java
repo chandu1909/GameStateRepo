@@ -6,6 +6,9 @@ import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Optional;
+
+
 @Service
 public class ItemService {
     private final GameStateRepo gameStateRepo;
@@ -29,10 +32,19 @@ public class ItemService {
 
     }
     //method that deletes the existing item by ID
-    public void deleteItem(Long id) {
-        slf4jLogger.info("Item found and Deleted the record..!!!");
-        gameStateRepo.deleteById(id);
+    public void deleteItem(Long id) throws ResourceNotFoundException,GreenLightException{
+        if (gameStateRepo.existsById(id)){
+            slf4jLogger.info("Item found and Deleted the record..!!!");
+            gameStateRepo.deleteById(id);
+            throw new GreenLightException();
+        }
+        else {
+            throw new ResourceNotFoundException();
+        }
 
+    }
 
+    public Optional<Item> getById(Long id) {
+        return gameStateRepo.findById(id);
     }
 }

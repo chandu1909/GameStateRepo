@@ -1,10 +1,15 @@
 package com.galvanize.ThanksGivingProject.GameStateRepository.controller;
 
 import com.galvanize.ThanksGivingProject.GameStateRepository.model.Item;
+import com.galvanize.ThanksGivingProject.GameStateRepository.service.GreenLightException;
 import com.galvanize.ThanksGivingProject.GameStateRepository.service.ItemService;
+import com.galvanize.ThanksGivingProject.GameStateRepository.service.ResourceNotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/item")
@@ -31,18 +36,37 @@ public class ItemController {
 
     //deleting existing item from the datastore
     @PostMapping("/delete/{id}")
-    public  Item deleteItem(@PathVariable Long id){
+    public  Item deleteItem(@PathVariable Long id) throws ResourceNotFoundException, GreenLightException {
         try{
 
             itemService.deleteItem(id);
+
         }
-        catch (Exception e){
-            slf4jLogger.error("Item Not Found" +e);
+        catch (ResourceNotFoundException notFound){
+
+            slf4jLogger.error("Item Not Found" +notFound);
+
+            throw new ResourceNotFoundException();
         }
+        catch (GreenLightException found){
+            slf4jLogger.error("Item Found and Deleted" +found);
+            throw new GreenLightException();
+        }
+
         return null;
     }
 
+    //Get specificItem Based on ID
+    @GetMapping("/get/{id}")
+    public Optional<Item> getItemById(@PathVariable Long id){
+        try{
+            return itemService.getById(id);
+        }
+        catch (Exception e){
 
+        }
+        return null;
+    }
 
 
 }
