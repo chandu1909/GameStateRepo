@@ -4,12 +4,13 @@ import com.galvanize.ThanksGivingProject.GameStateRepository.model.Item;
 import com.galvanize.ThanksGivingProject.GameStateRepository.service.GreenLightException;
 import com.galvanize.ThanksGivingProject.GameStateRepository.service.ItemService;
 import com.galvanize.ThanksGivingProject.GameStateRepository.service.ResourceNotFoundException;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
+
+import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @RestController
 @RequestMapping("/item")
@@ -69,6 +70,19 @@ public class ItemController {
             throw new GreenLightException();
         }
 
+    }
+
+    //Get Items by the class Name..
+    @GetMapping("get/class/{name}")
+    public Iterable<Item> getItemsByClass(@PathVariable String name){
+        try{
+            return itemService.getByClass(name);
+        }
+        catch (Exception e){
+            slf4jLogger.info("Item fetching failed");
+        }
+
+        return null;
     }
 
 

@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.validation.constraints.AssertTrue;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -104,6 +105,25 @@ public class GameStateRepositoryApplicationTests {
 
 		//TearDown
 	}
+
+	//Testing get all items of a specific type
+    @Test
+    public void testGetSameTypeItems(){
+        assertTrue(true);
+	    //setup
+        String item_name = "SWORD";
+        ArrayList<Item> expectedResult = new ArrayList<Item>();
+        ItemController itemController = new ItemController(mockItemService);
+        when(mockItemService.getByClass(item_name)).thenReturn(expectedResult);
+
+        //Execute
+        ArrayList actualResult =  (ArrayList) itemController.getItemsByClass(item_name);
+
+        //Assert
+        assertEquals(expectedResult,actualResult);
+
+        //Teardown
+    }
 
 
 }

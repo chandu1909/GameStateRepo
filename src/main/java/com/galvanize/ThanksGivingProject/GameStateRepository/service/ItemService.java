@@ -4,11 +4,19 @@ import com.galvanize.ThanksGivingProject.GameStateRepository.model.Item;
 import com.galvanize.ThanksGivingProject.GameStateRepository.repository.GameStateRepo;
 import org.apache.logging.slf4j.SLF4JLogger;
 import org.springframework.boot.logging.Slf4JLoggingSystem;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.persistence.TypedQuery;
+import javax.swing.text.html.Option;
+import java.util.ArrayList;
 import java.util.Optional;
+import java.util.logging.Filter;
+
+import static org.hibernate.hql.internal.antlr.SqlTokenTypes.FROM;
+import static org.hibernate.loader.Loader.SELECT;
 
 
 @Service
@@ -58,6 +66,12 @@ public class ItemService {
             throw new ResourceNotFoundException();
         }
 
+
+    }
+
+    public Iterable<Item> getByClass(String item_name) {
+        slf4jLogger.info("Item Found");
+        return gameStateRepo.findByName(item_name);
 
     }
 }
